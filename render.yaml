@@ -1,0 +1,146 @@
+# ═══════════════════════════════════════════════════════════════
+#  render.yaml — Render Blueprint (Cron Job)
+#  https://render.com/docs/blueprint-spec
+# ═══════════════════════════════════════════════════════════════
+
+services:
+  # ─── Web Panel ───────────────────────────────────────────────
+  - type: web
+    name: social-publisher-panel
+    runtime: docker
+    dockerfilePath: ./Dockerfile.web
+    region: frankfurt
+    plan: starter
+    envVars:
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: SPREADSHEET_ID
+        sync: false
+      - key: SHEET_NAME
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: META_API_VERSION
+        sync: false
+      - key: IG_USER_ID
+        sync: false
+      - key: IG_ACCESS_TOKEN
+        sync: false
+      - key: FB_PAGE_ID
+        sync: false
+      - key: FB_PAGE_ACCESS_TOKEN
+        sync: false
+      - key: GOOGLE_DRIVE_FOLDER_ID
+        sync: false
+      - key: WEB_PANEL_SECRET
+        sync: false
+      - key: WEB_PANEL_DEV_SECRET
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: APP_BASE_URL
+        sync: false
+      - key: CLIENT_NAME
+        sync: false
+      - key: REPO_URL
+        sync: false
+      # ─── Google Business Profile (optional) ──────────────────
+      - key: GBP_ACCOUNT_ID
+        sync: false
+      - key: GBP_DEFAULT_LOCATION_ID
+        sync: false
+      - key: GBP_OAUTH_CLIENT_ID
+        sync: false
+      - key: GBP_OAUTH_CLIENT_SECRET
+        sync: false
+      - key: GBP_REFRESH_TOKEN
+        sync: false
+      - key: GBP_ENABLED
+        sync: false
+      # ─── LinkedIn (optional) ─────────────────────────────────
+      - key: LI_OAUTH_CLIENT_ID
+        sync: false
+      - key: LI_OAUTH_CLIENT_SECRET
+        sync: false
+      - key: LI_REFRESH_TOKEN
+        sync: false
+      - key: LI_AUTHOR_URN
+        sync: false
+      - key: LI_ENABLED
+        sync: false
+
+  # ─── Cron Job (Publisher) ────────────────────────────────────
+  - type: cron
+    name: social-publisher
+    runtime: docker
+    schedule: "*/5 * * * *"   # כל דקה (UTC) — אפשר לשנות ל-*/5 לחיסכון
+    dockerfilePath: ./Dockerfile
+    region: frankfurt           # הכי קרוב לישראל
+    plan: starter               # שנה לפי צורך
+    envVars:
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: SPREADSHEET_ID
+        sync: false
+      - key: SHEET_NAME
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: CLOUDINARY_RETENTION_DAYS
+        sync: false
+      - key: META_API_VERSION
+        sync: false
+      - key: IG_USER_ID
+        sync: false
+      - key: IG_ACCESS_TOKEN
+        sync: false
+      - key: FB_PAGE_ID
+        sync: false
+      - key: FB_PAGE_ACCESS_TOKEN
+        sync: false
+      - key: PUBLISH_MAX_RETRIES
+        sync: false
+      - key: PUBLISH_RETRY_DELAY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: APP_BASE_URL
+        sync: false
+      - key: CLIENT_NAME
+        sync: false
+      # ─── Google Business Profile (optional) ──────────────────
+      - key: GBP_ACCOUNT_ID
+        sync: false
+      - key: GBP_DEFAULT_LOCATION_ID
+        sync: false
+      - key: GBP_OAUTH_CLIENT_ID
+        sync: false
+      - key: GBP_OAUTH_CLIENT_SECRET
+        sync: false
+      - key: GBP_REFRESH_TOKEN
+        sync: false
+      - key: GBP_ENABLED
+        sync: false
+      # ─── LinkedIn (optional) ─────────────────────────────────
+      - key: LI_OAUTH_CLIENT_ID
+        sync: false
+      - key: LI_OAUTH_CLIENT_SECRET
+        sync: false
+      - key: LI_REFRESH_TOKEN
+        sync: false
+      - key: LI_AUTHOR_URN
+        sync: false
+      - key: LI_ENABLED
+        sync: false

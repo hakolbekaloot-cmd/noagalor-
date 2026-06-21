@@ -1,0 +1,24 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Lower glibc's trim threshold so memory freed back to malloc is actually
+# returned to the OS. Without this, RSS stays high after a spike (e.g.
+# Pillow buffers, googleapiclient response bodies) and Render's 512MB
+# limit eventually trips even though the heap is mostly unused.
+ENV MALLOC_TRIM_THRESHOLD_=131072
+
+# One worker with threads (not two sync workers): the app is I/O-bound on
+# Google APIs, Google clients are already thread-safe via threading.local,
+# and on Render's 512MB starter plan halving the baseline process count is
+# the biggest single lever for avoiding OOM during burst traffic (e.g. when
+# a user deletes many posts one after another).
+#
+# --max-requests is intentionally low: googleapiclient and Pillow buffers
+# fragment the heap over time, so recycling the worker every ~250 requests
+# returns memory to the OS before it can drift past Render's 512MB limit.
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "4", "--timeout", "120", "--max-requests", "250", "--max-requests-jitter", "50", "web_app:app"]

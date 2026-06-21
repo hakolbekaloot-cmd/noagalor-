@@ -6,6 +6,7 @@
 
 ## 🏗️ ארכיטקטורה
 
+```
 Render Cron Job (כל דקה, UTC)
        │
        ▼
@@ -22,6 +23,7 @@ Render Cron Job (כל דקה, UTC)
        │   └── Facebook: /photos או /videos
        │
        └── Google Sheets API ← עדכון סטטוס (POSTED / ERROR)
+```
 
 ---
 
@@ -80,6 +82,7 @@ Render Cron Job (כל דקה, UTC)
 
 ## 📁 מבנה הפרויקט
 
+```
 social-publisher/
 ├── main.py              # סקריפט ראשי (entry point)
 ├── config.py            # הגדרות + env vars + קבועים
@@ -90,12 +93,13 @@ social-publisher/
 ├── render.yaml          # Render Blueprint
 ├── .env.example         # דוגמה ל-env vars
 └── README.md            # אתה פה
+```
 
 ---
 
 ## 🔧 הרצה מקומית (לבדיקות)
 
-bash
+```bash
 # התקנת תלויות
 pip install -r requirements.txt
 
@@ -106,6 +110,7 @@ export SPREADSHEET_ID='...'
 
 # הרצה
 python main.py
+```
 
 ---
 
