@@ -301,7 +301,7 @@ _PRIVACY_POLICY_HTML = """<!DOCTYPE html>
   <div class="lang-switch"><a href="#en">English version below</a></div>
 
   <h1>מדיניות פרטיות — Social Publisher</h1>
-  <p class="meta">עודכן לאחרונה: מאי 2026</p>
+  <p class="meta">עודכן לאחרונה: יוני 2026</p>
 
   <h2>על השירות</h2>
   <p>
@@ -363,7 +363,7 @@ _PRIVACY_POLICY_HTML = """<!DOCTYPE html>
   <h2>יצירת קשר</h2>
   <p>
     בכל שאלה או בקשה הקשורה למדיניות פרטיות זו ניתן לפנות אל:
-    <a href="mailto:shiraagd@gmail.com">shiraagd@gmail.com</a>
+    <a href="mailto:hakolbekaloot@gmail.com">hakolbekaloot@gmail.com</a>
   </p>
 
   <hr id="en" style="margin: 48px 0 24px;">
@@ -435,7 +435,7 @@ _PRIVACY_POLICY_HTML = """<!DOCTYPE html>
     <h2>Contact</h2>
     <p>
       For any privacy-related question or request:
-      <a href="mailto:shiraagd@gmail.com">shiraagd@gmail.com</a>
+      <a href="mailto:hakolbekaloot@gmail.com">hakolbekaloot@gmail.com</a>
     </p>
   </div>
 </body>
